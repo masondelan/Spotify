@@ -1,0 +1,1064 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\usepackage{soul}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={131 Final Project},
+  pdfauthor={mason delan},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{131 Final Project}
+\author{mason delan}
+\date{2024-06-04}
+
+\begin{document}
+\maketitle
+
+\hypertarget{spotify-charts---exploring-sound-characteristics}{%
+\section{\texorpdfstring{\ul{Spotify Charts - Exploring Sound
+Characteristics}}{Spotify Charts - Exploring Sound Characteristics}}\label{spotify-charts---exploring-sound-characteristics}}
+
+\includegraphics{images/spotify logo.jpeg}
+
+\hypertarget{introduction}{%
+\section{\texorpdfstring{\textbf{Introduction}}{Introduction}}\label{introduction}}
+
+This data set encompasses all ``Top 200'' and ``Viral 50'' charts
+released worldwide by Spotify. Updated every 2-3 days, it includes all
+charts from January 1, 2019, onward. This collection builds on the
+Kaggle Data set: Spotify Charts, featuring 29 entries for each record
+obtained via the Spotify API. I chose this data set because of my
+passion for music, I have been mixing and producing electronic dance
+music for 3 years now. Something I decided to pursue was my DJ career
+here in Santa Barbara, playing at local clubs and bars. It has also
+allowed me to integrate myself in the community in such a profound and
+exciting way. The main motivation for this project is gain a deeper
+understanding into the music industry. I am seeking information about
+how popular tracks impact certain markets/regions. There is a lot of
+data in this data set (\textasciitilde25.2 GB), so running models may be
+timely. There are a few variables of interest that spotify has created
+in order to gain certain metrics from their platform, including
+danceability, acousticness, and loudness. We will attempt to explore the
+relationship between said variables and the popularity of each song
+(rank, streaming numbers, popularity metric) in order to draw
+interesting conclusions.
+
+The data set comes from Kaggle, but the original source is from Spotify
+charts.
+
+\hypertarget{sources}{%
+\subsection{\texorpdfstring{\textbf{Sources}}{Sources}}\label{sources}}
+
+Citation: \url{https://www.spotify.com/}
+\url{https://spotifycharts.com/}
+
+Kaggle Page:
+\url{https://www.kaggle.com/datasets/sunnykakar/spotify-charts-all-audio-data/data}
+
+\hypertarget{missing-values}{%
+\section{\texorpdfstring{\textbf{Missing
+Values}}{Missing Values}}\label{missing-values}}
+
+I'm going to start by reducing my data set by discarding missing values
+and narrowing down the variables I am most interested in. This initial
+step will help ensure the quality and reliability of the data I use for
+modeling. By removing rows with missing values, I can prevent potential
+biases and inaccuracies that could arise from incomplete data. Focusing
+on the most relevant variables will streamline the data set, making it
+easier to interpret. This targeted approach will improve the efficiency
+and performance of machine learning models.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)  }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## -- Attaching core tidyverse packages ------------------------ tidyverse 2.0.0 --
+## v dplyr     1.1.4     v readr     2.1.5
+## v forcats   1.0.0     v stringr   1.5.1
+## v ggplot2   3.5.0     v tibble    3.2.1
+## v lubridate 1.9.3     v tidyr     1.3.1
+## v purrr     1.0.2     
+## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+## i Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)    }
+\FunctionTok{library}\NormalTok{(dplyr)      }
+\FunctionTok{library}\NormalTok{(DataExplorer) }\CommentTok{\# For automated EDA}
+\FunctionTok{library}\NormalTok{(tidymodels)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## -- Attaching packages -------------------------------------- tidymodels 1.2.0 --
+## v broom        1.0.5      v rsample      1.2.1 
+## v dials        1.2.1      v tune         1.2.1 
+## v infer        1.0.7      v workflows    1.1.4 
+## v modeldata    1.3.0      v workflowsets 1.1.0 
+## v parsnip      1.2.1      v yardstick    1.3.1 
+## v recipes      1.0.10     
+## -- Conflicts ----------------------------------------- tidymodels_conflicts() --
+## x scales::discard() masks purrr::discard()
+## x dplyr::filter()   masks stats::filter()
+## x recipes::fixed()  masks stringr::fixed()
+## x dplyr::lag()      masks stats::lag()
+## x yardstick::spec() masks readr::spec()
+## x recipes::step()   masks stats::step()
+## * Use tidymodels_prefer() to resolve common conflicts.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(kknn)}
+\FunctionTok{library}\NormalTok{(yardstick)}
+\FunctionTok{library}\NormalTok{(parsnip)}
+\FunctionTok{library}\NormalTok{(tune)}
+\FunctionTok{library}\NormalTok{(themis)}
+\FunctionTok{library}\NormalTok{(ranger)}
+\FunctionTok{library}\NormalTok{(recipes)}
+
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{123}\NormalTok{)}
+
+\FunctionTok{setwd}\NormalTok{(}\StringTok{"/Users/masondelan/Desktop/131finalproject/"}\NormalTok{)}
+
+\NormalTok{data }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"/Users/masondelan/Desktop/131finalproject/merged\_data.csv"}\NormalTok{)}
+
+\FunctionTok{str}\NormalTok{(data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    26174269 obs. of  29 variables:
+##  $ X                  : int  0 1 2 3 4 5 6 7 8 9 ...
+##  $ title              : chr  "Chantaje (feat. Maluma)" "Vente Pa' Ca (feat. Maluma)" "Reggaetón Lento (Bailemos)" "Safari" ...
+##  $ rank               : int  1 2 3 4 5 6 7 8 9 10 ...
+##  $ date               : chr  "2017-01-01" "2017-01-01" "2017-01-01" "2017-01-01" ...
+##  $ artist             : chr  "Shakira" "Ricky Martin" "CNCO" "J Balvin, Pharrell Williams, BIA, Sky" ...
+##  $ url                : chr  "https://open.spotify.com/track/6mICuAdrwEjh6Y6lroV2Kg" "https://open.spotify.com/track/7DM4BPaS7uofFul3ywMe46" "https://open.spotify.com/track/3AEZUABDXNtecAOSC1qTfo" "https://open.spotify.com/track/6rQSrBHf7HlZjtcMZ4S4bO" ...
+##  $ region             : chr  "Argentina" "Argentina" "Argentina" "Argentina" ...
+##  $ chart              : chr  "top200" "top200" "top200" "top200" ...
+##  $ trend              : chr  "SAME_POSITION" "MOVE_UP" "MOVE_DOWN" "SAME_POSITION" ...
+##  $ streams            : num  253019 223988 210943 173865 153956 ...
+##  $ track_id           : chr  "6mICuAdrwEjh6Y6lroV2Kg" "7DM4BPaS7uofFul3ywMe46" "3AEZUABDXNtecAOSC1qTfo" "6rQSrBHf7HlZjtcMZ4S4bO" ...
+##  $ album              : chr  "El Dorado" "Vente Pa' Ca (feat. Maluma)" "Primera Cita" "Energía" ...
+##  $ popularity         : num  78 72 73 0 0 0 56 74 59 0 ...
+##  $ duration_ms        : num  195840 259195 222560 205600 234320 ...
+##  $ explicit           : chr  "False" "False" "False" "False" ...
+##  $ release_date       : chr  "2017-05-26" "2016-09-22" "2016-08-26" "2016-06-24" ...
+##  $ available_markets  : chr  "['AR', 'AU', 'AT', 'BE', 'BO', 'BR', 'BG', 'CA', 'CL', 'CO', 'CR', 'CY', 'CZ', 'DK', 'DO', 'DE', 'EC', 'EE', 'S"| __truncated__ "['AR', 'AU', 'AT', 'BE', 'BO', 'BR', 'BG', 'CA', 'CL', 'CO', 'CR', 'CY', 'CZ', 'DK', 'DO', 'DE', 'EC', 'EE', 'S"| __truncated__ "['AR', 'AU', 'AT', 'BE', 'BO', 'BG', 'CA', 'CL', 'CO', 'CR', 'CY', 'CZ', 'DK', 'DO', 'DE', 'EC', 'EE', 'SV', 'F"| __truncated__ "[]" ...
+##  $ af_danceability    : num  0.852 0.663 0.761 0.508 0.899 0.776 0.588 0.832 0.736 0.721 ...
+##  $ af_energy          : num  0.773 0.92 0.838 0.687 0.626 0.669 0.682 0.772 0.964 0.687 ...
+##  $ af_key             : num  8 11 4 0 6 11 11 10 0 1 ...
+##  $ af_loudness        : num  -2.92 -4.07 -3.07 -4.36 -4.23 ...
+##  $ af_mode            : num  0 0 0 1 0 1 0 1 1 1 ...
+##  $ af_speechiness     : num  0.0776 0.226 0.0502 0.326 0.292 0.0638 0.173 0.1 0.129 0.0782 ...
+##  $ af_acousticness    : num  0.187 0.00431 0.4 0.551 0.076 0.142 0.0851 0.0559 0.198 0.0998 ...
+##  $ af_instrumentalness: num  3.05e-05 1.69e-05 0.00 3.41e-06 0.00 0.00 2.69e-05 4.86e-04 2.32e-06 0.00 ...
+##  $ af_liveness        : num  0.159 0.101 0.176 0.126 0.0631 0.219 0.084 0.44 0.336 0.0679 ...
+##  $ af_valence         : num  0.907 0.533 0.71 0.555 0.873 0.661 0.937 0.704 0.953 0.825 ...
+##  $ af_tempo           : num  102 99.9 94 180 88 ...
+##  $ af_time_signature  : num  4 4 4 4 4 4 4 4 4 4 ...
+\end{verbatim}
+
+It seems like we have too much data for my laptop to handle, I am
+checking for missing values and removing rows with missing values. I
+believe that this could affect the data and skew my results, however, I
+am willing to make this compromise for compilation purposes. Below I am
+cleaning up the data and printing my data to ensure what I want removed
+from the data set is gone.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# check for missing values}
+\FunctionTok{sum}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(data))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 10111822
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{missing\_values }\OtherTok{\textless{}{-}} \FunctionTok{colSums}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(data))}
+\FunctionTok{print}\NormalTok{(missing\_values)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                   X               title                rank                date 
+##                   0                   0                   0                   0 
+##              artist                 url              region               chart 
+##                   0                   0                   0                   0 
+##               trend             streams            track_id               album 
+##                   0             5852308                   0                   0 
+##          popularity         duration_ms            explicit        release_date 
+##              304251              304251                   0                   0 
+##   available_markets     af_danceability           af_energy              af_key 
+##                   0              304251              304251              304251 
+##         af_loudness             af_mode      af_speechiness     af_acousticness 
+##              304251              304251              304251              304251 
+## af_instrumentalness         af_liveness          af_valence            af_tempo 
+##              304251              304251              304251              304251 
+##   af_time_signature 
+##              304251
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# removing rows with any missing values}
+\NormalTok{cleaned\_spotify\_data }\OtherTok{\textless{}{-}}\NormalTok{ data }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{drop\_na}\NormalTok{()}
+
+\CommentTok{\# ensuring that missing values have been removed}
+\NormalTok{cleaned\_missing\_values }\OtherTok{\textless{}{-}}\FunctionTok{colSums}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(cleaned\_spotify\_data))}
+\FunctionTok{print}\NormalTok{(cleaned\_missing\_values)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                   X               title                rank                date 
+##                   0                   0                   0                   0 
+##              artist                 url              region               chart 
+##                   0                   0                   0                   0 
+##               trend             streams            track_id               album 
+##                   0                   0                   0                   0 
+##          popularity         duration_ms            explicit        release_date 
+##                   0                   0                   0                   0 
+##   available_markets     af_danceability           af_energy              af_key 
+##                   0                   0                   0                   0 
+##         af_loudness             af_mode      af_speechiness     af_acousticness 
+##                   0                   0                   0                   0 
+## af_instrumentalness         af_liveness          af_valence            af_tempo 
+##                   0                   0                   0                   0 
+##   af_time_signature 
+##                   0
+\end{verbatim}
+
+Here we are reducing the data set size, as we have over 20 million
+observations. A popularity threshold of greater than 50 has been used as
+the baseline, excluding observations with a score under 50. I am also
+limiting my data to about 10,000 observations. This targeted reduction
+simplifies the data set and focuses analysis on the most relevant and
+impactful subset of data, ensuring meaningful results aligned with the
+project's objectives.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{reduced\_data }\OtherTok{\textless{}{-}}\NormalTok{ cleaned\_spotify\_data }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{sample\_frac}\NormalTok{(}\FloatTok{0.2}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(title, artist, popularity, af\_danceability, af\_loudness, af\_acousticness, af\_energy) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(popularity }\SpecialCharTok{\textgreater{}} \DecValTok{50}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}  \FunctionTok{sample\_n}\NormalTok{(}\DecValTok{10000}\NormalTok{)}
+
+\CommentTok{\# checking structure of our reduced data set}
+\FunctionTok{str}\NormalTok{(reduced\_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    10000 obs. of  7 variables:
+##  $ title          : chr  "Rockabye (feat. Sean Paul & Anne-Marie)" "No Limit" "Eastside (with Halsey & Khalid)" "Photograph" ...
+##  $ artist         : chr  "Clean Bandit" "G-Eazy, A$AP Rocky, Cardi B" "benny blanco" "Ed Sheeran" ...
+##  $ popularity     : num  74 69 75 65 74 83 71 84 80 65 ...
+##  $ af_danceability: num  0.72 0.838 0.56 0.614 0.749 0.585 0.716 0.649 0.73 0.789 ...
+##  $ af_loudness    : num  -4.07 -3.79 -7.65 -10.48 -5.06 ...
+##  $ af_acousticness: num  0.406 0.0117 0.555 0.607 0.0193 0.124 0.462 0.0863 0.132 0.256 ...
+##  $ af_energy      : num  0.763 0.771 0.68 0.379 0.794 0.52 0.823 0.716 0.701 0.633 ...
+\end{verbatim}
+
+I decided to keep a few variables that I am most interested in, which
+include: artist, title, popularity, danceability, loudness,
+acousticness, and energy. All of which I believe will give me the most
+meaningful information about how/why a song is charting high on spotify.
+
+\hypertarget{eda}{%
+\section{\texorpdfstring{\textbf{EDA}}{EDA}}\label{eda}}
+
+During this section of exploratory data analysis, I am seeking to gain
+an understanding of how the variables I selected relate to one another.
+What interests me the most is how the popularity rating differs between
+danceability, acousticness, loudness, and energy. I have demonstrated a
+few plots to visualize these relationships. From the graph below we see
+the range in acousticness of a particular song in relation to its
+popularity, we cannot definitively say much other than its observable
+even spread. The mean seems to hang around the middle of our plot.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(reduced\_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                                     title                      artist
+## 1 Rockabye (feat. Sean Paul & Anne-Marie)                Clean Bandit
+## 2                                No Limit G-Eazy, A$AP Rocky, Cardi B
+## 3         Eastside (with Halsey & Khalid)                benny blanco
+## 4                              Photograph                  Ed Sheeran
+## 5   Venom - Music From The Motion Picture                      Eminem
+## 6              rockstar (feat. 21 Savage)                 Post Malone
+##   popularity af_danceability af_loudness af_acousticness af_energy
+## 1         74           0.720      -4.068          0.4060     0.763
+## 2         69           0.838      -3.791          0.0117     0.771
+## 3         75           0.560      -7.648          0.5550     0.680
+## 4         65           0.614     -10.480          0.6070     0.379
+## 5         74           0.749      -5.063          0.0193     0.794
+## 6         83           0.585      -6.136          0.1240     0.520
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(reduced\_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     title              artist            popularity    af_danceability 
+##  Length:10000       Length:10000       Min.   :51.00   Min.   :0.2180  
+##  Class :character   Class :character   1st Qu.:62.00   1st Qu.:0.6100  
+##  Mode  :character   Mode  :character   Median :71.00   Median :0.7050  
+##                                        Mean   :70.57   Mean   :0.6877  
+##                                        3rd Qu.:78.00   3rd Qu.:0.7850  
+##                                        Max.   :90.00   Max.   :0.9800  
+##   af_loudness      af_acousticness       af_energy     
+##  Min.   :-22.507   Min.   :0.0000255   Min.   :0.0316  
+##  1st Qu.: -7.206   1st Qu.:0.0589000   1st Qu.:0.5380  
+##  Median : -5.652   Median :0.1770000   Median :0.6620  
+##  Mean   : -5.985   Mean   :0.2569060   Mean   :0.6421  
+##  3rd Qu.: -4.374   3rd Qu.:0.3900000   3rd Qu.:0.7650  
+##  Max.   :  0.175   Max.   :0.9940000   Max.   :0.9890
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# getting a general idea of variables and their frequencies}
+\FunctionTok{plot\_histogram}\NormalTok{(reduced\_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{131finalproject_files/figure-latex/unnamed-chunk-4-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# popularity \& acousticness}
+\FunctionTok{ggplot}\NormalTok{(reduced\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ popularity, }\AttributeTok{y =}\NormalTok{ af\_acousticness, }\AttributeTok{fill =}\NormalTok{ popularity)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Popularity in Relation to Acousticness"}\NormalTok{, }\AttributeTok{x =} \StringTok{"popularity"}\NormalTok{, }\AttributeTok{y =} \StringTok{"acousticness"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{45}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{131finalproject_files/figure-latex/unnamed-chunk-4-2.pdf}
+
+\hypertarget{histograms-of-relevant-variables}{%
+\subsection{\texorpdfstring{\textbf{Histograms of relevant
+variables}}{Histograms of relevant variables}}\label{histograms-of-relevant-variables}}
+
+I will now visualize the distributions of my variables of interest
+(danceability, loudness, acousticness, energy) with histograms. This
+will help me determine what models would work best for our variables of
+interest.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{hist}\NormalTok{(reduced\_data}\SpecialCharTok{$}\NormalTok{af\_danceability, }\AttributeTok{main=}\StringTok{"Danceability Distribution"}\NormalTok{, }\AttributeTok{xlab=}\StringTok{"Danceability"}\NormalTok{, }\AttributeTok{col=}\StringTok{"blue"}\NormalTok{, }\AttributeTok{breaks=}\DecValTok{30}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{131finalproject_files/figure-latex/unnamed-chunk-5-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{hist}\NormalTok{(reduced\_data}\SpecialCharTok{$}\NormalTok{af\_loudness, }\AttributeTok{main =} \StringTok{\textquotesingle{}Loudness Distribution\textquotesingle{}}\NormalTok{, }\AttributeTok{xlab =} \StringTok{\textquotesingle{}Loudness\textquotesingle{}}\NormalTok{, }\AttributeTok{col =} \StringTok{\textquotesingle{}blue\textquotesingle{}}\NormalTok{, }\AttributeTok{breaks =} \DecValTok{30}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{131finalproject_files/figure-latex/unnamed-chunk-6-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{hist}\NormalTok{(reduced\_data}\SpecialCharTok{$}\NormalTok{af\_acousticness, }\AttributeTok{main =} \StringTok{\textquotesingle{}Acousticness Distribution\textquotesingle{}}\NormalTok{, }\AttributeTok{xlab =} \StringTok{"Acousticness"}\NormalTok{, }\AttributeTok{col =} \StringTok{\textquotesingle{}blue\textquotesingle{}}\NormalTok{, }\AttributeTok{breaks =} \DecValTok{30}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{131finalproject_files/figure-latex/unnamed-chunk-7-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{hist}\NormalTok{(reduced\_data}\SpecialCharTok{$}\NormalTok{af\_energy, }\AttributeTok{main =} \StringTok{\textquotesingle{}Energy Distribution\textquotesingle{}}\NormalTok{, }\AttributeTok{xlab =} \StringTok{\textquotesingle{}Energy\textquotesingle{}}\NormalTok{, }\AttributeTok{col =} \StringTok{\textquotesingle{}blue\textquotesingle{}}\NormalTok{, }\AttributeTok{breaks =} \DecValTok{30}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{131finalproject_files/figure-latex/unnamed-chunk-8-1.pdf}
+
+The histograms reveal that danceability, loudness, and energy have
+normal distributions, centered around a mean with symmetrical tails,
+which is beneficial for statistical models assuming normally distributed
+input data. Acousticness, however, does not display a normal
+distribution and shows a decreasing exponential curve, with most values
+clustered towards the lower end. This skewness could impact our models
+differently, and we must account for it during analysis. Understanding
+these distributions is crucial for selecting models and ensuring data
+meets modeling techniques' assumptions. These patterns will influence
+model performance and accuracy in subsequent steps.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(reduced\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ popularity, }\AttributeTok{y =}\NormalTok{ af\_loudness, }\AttributeTok{fill =}\NormalTok{ popularity)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Popularity in Relation to Loudness"}\NormalTok{, }\AttributeTok{x =} \StringTok{"popularity"}\NormalTok{, }\AttributeTok{y =} \StringTok{"loudness"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{45}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{131finalproject_files/figure-latex/unnamed-chunk-9-1.pdf}
+
+The numerical values for loudness range from 0 to \textasciitilde-11,
+hence the graph is upside down. We do not have to worry about this since
+the nature of our values are different. We can see that loudness does
+play a role in the popularity of a song, as loudness increases so does
+the frequencies in popularity, very interesting!
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(reduced\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ popularity, }\AttributeTok{y =}\NormalTok{ af\_energy, }\AttributeTok{fill =}\NormalTok{ popularity)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Popularity in Relation to Energy"}\NormalTok{, }\AttributeTok{x =} \StringTok{"popularity"}\NormalTok{, }\AttributeTok{y =} \StringTok{"energy"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{45}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{131finalproject_files/figure-latex/unnamed-chunk-10-1.pdf}
+
+The bar plot shows that energy significantly influences Spotify song
+popularity. However, the study also aims to explore other variables and
+their relationships, examining correlations between them. This will help
+identify the most related features and their interactions, potentially
+uncovering hidden patterns and dependencies. This understanding will
+inform the modeling strategy and help select the most relevant features
+for predictive models. The next step is to create a correlation matrix
+and visualize these relationships, providing a comprehensive overview of
+how each variable influences and relates to others.
+
+\hypertarget{correlation-matrix-heat-map}{%
+\subsection{\texorpdfstring{\textbf{Correlation Matrix \& Heat
+Map}}{Correlation Matrix \& Heat Map}}\label{correlation-matrix-heat-map}}
+
+Lets now create a correlation matrix \& heat map to better understand
+all the relationships at play.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{numeric\_df }\OtherTok{\textless{}{-}}\NormalTok{ reduced\_data[, }\FunctionTok{sapply}\NormalTok{(reduced\_data, is.numeric)]}
+\NormalTok{correlation\_matrix }\OtherTok{\textless{}{-}} \FunctionTok{cor}\NormalTok{(numeric\_df)}
+\CommentTok{\# Load necessary packages}
+\FunctionTok{library}\NormalTok{(corrplot)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## corrplot 0.92 loaded
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(Hmisc)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'Hmisc'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:parsnip':
+## 
+##     translate
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:dplyr':
+## 
+##     src, summarize
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     format.pval, units
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{corrplot}\NormalTok{(correlation\_matrix, }\AttributeTok{method =} \StringTok{"color"}\NormalTok{, }
+         \AttributeTok{col =} \FunctionTok{colorRampPalette}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"red"}\NormalTok{, }\StringTok{"white"}\NormalTok{, }\StringTok{"blue"}\NormalTok{))(}\DecValTok{200}\NormalTok{), }
+         \AttributeTok{type =} \StringTok{"upper"}\NormalTok{, }\AttributeTok{order =} \StringTok{"hclust"}\NormalTok{, }
+         \AttributeTok{addCoef.col =} \StringTok{"black"}\NormalTok{, }\AttributeTok{tl.cex =} \FloatTok{0.8}\NormalTok{, }\AttributeTok{tl.col =} \StringTok{"black"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{131finalproject_files/figure-latex/unnamed-chunk-11-1.pdf}
+
+The heatmap reveals a strong positive correlation between loudness and
+energy, suggesting that as a song's loudness increases, its energy level
+also increases. This relationship is intuitive, as higher volume
+typically conveys more energy and intensity. Conversely, the lowest
+correlation is between energy and acousticness, suggesting that as
+energy increases, its acoustic qualities decrease. Understanding these
+correlations is crucial as they provide insights into the relationships
+between song attributes, impacting model performance and interpretation.
+These findings will guide feature selection and model development,
+ensuring accurate predictive analysis.
+
+\hypertarget{splitting-the-data}{%
+\section{\texorpdfstring{\textbf{Splitting the
+data}}{Splitting the data}}\label{splitting-the-data}}
+
+The data is divided into training and testing datasets to ensure the
+model's generalizability to unseen data. A 70/30 split is chosen, with
+70\% used for training and 30\% for testing. Given that we have a
+substantial dataset with over 2.4 million observations after reduction,
+this split provides a robust sample size for both training
+(\textasciitilde1.7 million observations) and testing
+(\textasciitilde740,000 observations). To maintain the distribution of
+the target variable, I opted to stratify the split based on popularity.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{split }\OtherTok{\textless{}{-}} \FunctionTok{initial\_split}\NormalTok{(reduced\_data, }\AttributeTok{prop =}\NormalTok{ .}\DecValTok{7}\NormalTok{, }\AttributeTok{strata =}\NormalTok{ popularity)}
+
+\NormalTok{training\_set }\OtherTok{\textless{}{-}} \FunctionTok{training}\NormalTok{(split)}
+\NormalTok{testing\_set }\OtherTok{\textless{}{-}} \FunctionTok{testing}\NormalTok{(split)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{recipe}{%
+\section{\texorpdfstring{\textbf{Recipe}}{Recipe}}\label{recipe}}
+
+Here I am setting up my recipe. Both title and artist are character
+variables so we will remove them from our training model.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{recipe }\OtherTok{\textless{}{-}} \FunctionTok{recipe}\NormalTok{(popularity }\SpecialCharTok{\textasciitilde{}}\NormalTok{ ., }\AttributeTok{data =}\NormalTok{ training\_set) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{step\_rm}\NormalTok{(title, artist) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{step\_zv}\NormalTok{(}\FunctionTok{all\_predictors}\NormalTok{()) }\SpecialCharTok{\%\textgreater{}\%}  
+  \FunctionTok{step\_dummy}\NormalTok{(}\FunctionTok{all\_nominal}\NormalTok{(), }\SpecialCharTok{{-}}\FunctionTok{all\_outcomes}\NormalTok{()) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{step\_normalize}\NormalTok{(}\FunctionTok{all\_numeric}\NormalTok{(), }\SpecialCharTok{{-}}\FunctionTok{all\_outcomes}\NormalTok{())}
+
+\CommentTok{\# prep recipe with training data}
+\NormalTok{prepared\_recipe }\OtherTok{\textless{}{-}} \FunctionTok{prep}\NormalTok{(recipe, }\AttributeTok{training =}\NormalTok{ training\_set)}
+
+\CommentTok{\# baking the recipe}
+\NormalTok{baked\_data }\OtherTok{\textless{}{-}} \FunctionTok{bake}\NormalTok{(prepared\_recipe, }\AttributeTok{new\_data =} \ConstantTok{NULL}\NormalTok{) }
+
+\FunctionTok{colnames}\NormalTok{(baked\_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "af_danceability" "af_loudness"     "af_acousticness" "af_energy"      
+## [5] "popularity"
+\end{verbatim}
+
+Stratifying cross validation on my response variable (popularity).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{spotify\_fold }\OtherTok{\textless{}{-}} \FunctionTok{vfold\_cv}\NormalTok{(training\_set, }\AttributeTok{v =} \DecValTok{5}\NormalTok{, }\AttributeTok{strata =}\NormalTok{ popularity)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{models}{%
+\section{\texorpdfstring{\textbf{Models}}{Models}}\label{models}}
+
+Since I am dealing with all numerical variables, it makes the most sense
+to include the following types of models:
+
+\begin{itemize}
+\item
+  Linear Regression
+\item
+  K Nearest Neighbors
+\item
+  Elastic Net
+\item
+  Boosted Trees
+\end{itemize}
+
+Let's define all our model specifications.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(xgboost)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'xgboost'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:dplyr':
+## 
+##     slice
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# regression}
+\NormalTok{linear\_spec }\OtherTok{\textless{}{-}} \FunctionTok{linear\_reg}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+               \FunctionTok{set\_engine}\NormalTok{(}\StringTok{"lm"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+               \FunctionTok{set\_mode}\NormalTok{(}\StringTok{"regression"}\NormalTok{)}
+
+\CommentTok{\# k nearest neighbors}
+\NormalTok{knn\_spec }\OtherTok{\textless{}{-}} \FunctionTok{nearest\_neighbor}\NormalTok{(}\AttributeTok{neighbors =} \FunctionTok{tune}\NormalTok{()) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{set\_engine}\NormalTok{(}\StringTok{"kknn"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{set\_mode}\NormalTok{(}\StringTok{"regression"}\NormalTok{)}
+
+\CommentTok{\# random forest}
+\NormalTok{rf\_spec }\OtherTok{\textless{}{-}} \FunctionTok{rand\_forest}\NormalTok{(}
+  \AttributeTok{trees =} \FunctionTok{tune}\NormalTok{(),       }
+  \AttributeTok{mtry =} \FunctionTok{tune}\NormalTok{(),        }
+  \AttributeTok{min\_n =} \FunctionTok{tune}\NormalTok{()) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{set\_engine}\NormalTok{(}\StringTok{"ranger"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{set\_mode}\NormalTok{(}\StringTok{"regression"}\NormalTok{)}
+
+\CommentTok{\# boosted tree}
+\NormalTok{boosted\_spec }\OtherTok{\textless{}{-}} \FunctionTok{boost\_tree}\NormalTok{(}
+    \AttributeTok{trees =} \FunctionTok{tune}\NormalTok{(),}
+    \AttributeTok{min\_n =} \FunctionTok{tune}\NormalTok{(),}
+    \AttributeTok{learn\_rate =} \FunctionTok{tune}\NormalTok{()) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{set\_engine}\NormalTok{(}\StringTok{"xgboost"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{set\_mode}\NormalTok{(}\StringTok{"regression"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{creating-workflows}{%
+\subsection{Creating workflows}\label{creating-workflows}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{logistic\_wf }\OtherTok{\textless{}{-}} \FunctionTok{workflow}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{add\_model}\NormalTok{(linear\_spec) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{add\_recipe}\NormalTok{(recipe)}
+
+\NormalTok{knn\_wf }\OtherTok{\textless{}{-}} \FunctionTok{workflow}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{add\_model}\NormalTok{(knn\_spec) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{add\_recipe}\NormalTok{(recipe)}
+
+\NormalTok{rf\_wf }\OtherTok{\textless{}{-}} \FunctionTok{workflow}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{add\_model}\NormalTok{(rf\_spec) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{add\_recipe}\NormalTok{(recipe)}
+
+\NormalTok{boosted\_wf }\OtherTok{\textless{}{-}} \FunctionTok{workflow}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{add\_model}\NormalTok{(boosted\_spec) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{add\_recipe}\NormalTok{(recipe)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{tuning-grid}{%
+\subsection{Tuning Grid}\label{tuning-grid}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{knn\_grid }\OtherTok{\textless{}{-}} \FunctionTok{grid\_regular}\NormalTok{(}\FunctionTok{neighbors}\NormalTok{(}\AttributeTok{range =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{5}\NormalTok{)), }\AttributeTok{levels =} \DecValTok{5}\NormalTok{)}
+
+\NormalTok{rf\_grid }\OtherTok{\textless{}{-}} \FunctionTok{grid\_regular}\NormalTok{(}
+  \FunctionTok{mtry}\NormalTok{(}\AttributeTok{range =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{5}\NormalTok{)), }
+  \FunctionTok{trees}\NormalTok{(}\AttributeTok{range =} \FunctionTok{c}\NormalTok{(}\DecValTok{200}\NormalTok{,}\DecValTok{1000}\NormalTok{)), }
+  \FunctionTok{min\_n}\NormalTok{(}\AttributeTok{range =} \FunctionTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{20}\NormalTok{)), }
+  \AttributeTok{levels =} \DecValTok{5}\NormalTok{)}
+
+
+\NormalTok{boosted\_grid }\OtherTok{\textless{}{-}} \FunctionTok{grid\_regular}\NormalTok{(}
+    \FunctionTok{trees}\NormalTok{(}\AttributeTok{range =} \FunctionTok{c}\NormalTok{(}\DecValTok{50}\NormalTok{, }\DecValTok{500}\NormalTok{)),}
+    \FunctionTok{min\_n}\NormalTok{(}\AttributeTok{range =} \FunctionTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{, }\DecValTok{20}\NormalTok{)),}
+    \FunctionTok{learn\_rate}\NormalTok{(}\AttributeTok{range =} \FunctionTok{c}\NormalTok{(}\FloatTok{0.01}\NormalTok{, }\FloatTok{0.3}\NormalTok{)),}
+    \AttributeTok{levels =} \DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{model-results}{%
+\subsection{Model Results}\label{model-results}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{logistic\_res }\OtherTok{\textless{}{-}} \FunctionTok{tune\_grid}\NormalTok{(}
+\NormalTok{  logistic\_wf,}
+  \AttributeTok{resamples =}\NormalTok{ spotify\_fold)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: No tuning parameters have been detected, performance will be evaluated
+## using the resamples with no tuning. Did you want to [tune()] parameters?
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{knn\_res }\OtherTok{\textless{}{-}} \FunctionTok{tune\_grid}\NormalTok{(}
+\NormalTok{  knn\_wf,}
+  \AttributeTok{resamples =}\NormalTok{ spotify\_fold,  }
+  \AttributeTok{grid =}\NormalTok{ knn\_grid)}
+
+\NormalTok{ rf\_res }\OtherTok{\textless{}{-}} \FunctionTok{tune\_grid}\NormalTok{(}
+\NormalTok{  rf\_wf,}
+  \AttributeTok{resamples =}\NormalTok{ spotify\_fold,}
+  \AttributeTok{grid =}\NormalTok{ rf\_grid)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## > A | warning: 5 columns were requested but there were 4 predictors in the data. 4 will be used.
+\end{verbatim}
+
+\begin{verbatim}
+## There were issues with some computations   A: x1There were issues with some computations   A: x2There were issues with some computations   A: x3There were issues with some computations   A: x4There were issues with some computations   A: x5There were issues with some computations   A: x6There were issues with some computations   A: x7There were issues with some computations   A: x8There were issues with some computations   A: x9There were issues with some computations   A: x10There were issues with some computations   A: x11There were issues with some computations   A: x12There were issues with some computations   A: x13There were issues with some computations   A: x14There were issues with some computations   A: x15There were issues with some computations   A: x16There were issues with some computations   A: x17There were issues with some computations   A: x18There were issues with some computations   A: x19There were issues with some computations   A: x20There were issues with some computations   A: x21There were issues with some computations   A: x22There were issues with some computations   A: x23There were issues with some computations   A: x24There were issues with some computations   A: x25There were issues with some computations   A: x26There were issues with some computations   A: x27There were issues with some computations   A: x28There were issues with some computations   A: x29There were issues with some computations   A: x30There were issues with some computations   A: x31There were issues with some computations   A: x32There were issues with some computations   A: x33There were issues with some computations   A: x34There were issues with some computations   A: x35There were issues with some computations   A: x36There were issues with some computations   A: x37There were issues with some computations   A: x38There were issues with some computations   A: x39There were issues with some computations   A: x40There were issues with some computations   A: x41There were issues with some computations   A: x42There were issues with some computations   A: x43There were issues with some computations   A: x44There were issues with some computations   A: x45There were issues with some computations   A: x46There were issues with some computations   A: x47There were issues with some computations   A: x48There were issues with some computations   A: x49There were issues with some computations   A: x50There were issues with some computations   A: x51There were issues with some computations   A: x52There were issues with some computations   A: x53There were issues with some computations   A: x54There were issues with some computations   A: x55There were issues with some computations   A: x56There were issues with some computations   A: x57There were issues with some computations   A: x58There were issues with some computations   A: x59There were issues with some computations   A: x60There were issues with some computations   A: x61There were issues with some computations   A: x62There were issues with some computations   A: x63There were issues with some computations   A: x64There were issues with some computations   A: x65There were issues with some computations   A: x66There were issues with some computations   A: x67There were issues with some computations   A: x68There were issues with some computations   A: x69There were issues with some computations   A: x70There were issues with some computations   A: x71There were issues with some computations   A: x72There were issues with some computations   A: x73There were issues with some computations   A: x74There were issues with some computations   A: x75There were issues with some computations   A: x76There were issues with some computations   A: x77There were issues with some computations   A: x78There were issues with some computations   A: x79There were issues with some computations   A: x80There were issues with some computations   A: x81There were issues with some computations   A: x82There were issues with some computations   A: x83There were issues with some computations   A: x84There were issues with some computations   A: x85There were issues with some computations   A: x86There were issues with some computations   A: x87There were issues with some computations   A: x88There were issues with some computations   A: x89There were issues with some computations   A: x90There were issues with some computations   A: x91There were issues with some computations   A: x92There were issues with some computations   A: x93There were issues with some computations   A: x94There were issues with some computations   A: x95There were issues with some computations   A: x96There were issues with some computations   A: x97There were issues with some computations   A: x98There were issues with some computations   A: x99There were issues with some computations   A: x100There were issues with some computations   A: x101There were issues with some computations   A: x102There were issues with some computations   A: x103There were issues with some computations   A: x104There were issues with some computations   A: x105There were issues with some computations   A: x106There were issues with some computations   A: x107There were issues with some computations   A: x108There were issues with some computations   A: x109There were issues with some computations   A: x110There were issues with some computations   A: x111There were issues with some computations   A: x112There were issues with some computations   A: x113There were issues with some computations   A: x114There were issues with some computations   A: x115There were issues with some computations   A: x116There were issues with some computations   A: x117There were issues with some computations   A: x118There were issues with some computations   A: x119There were issues with some computations   A: x120There were issues with some computations   A: x121There were issues with some computations   A: x122There were issues with some computations   A: x123There were issues with some computations   A: x124There were issues with some computations   A: x125There were issues with some computations   A: x125
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{boosted\_res }\OtherTok{\textless{}{-}} \FunctionTok{tune\_grid}\NormalTok{(}
+\NormalTok{ boosted\_wf,}
+  \AttributeTok{resamples =}\NormalTok{ spotify\_fold,}
+  \AttributeTok{grid =}\NormalTok{ boosted\_grid)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{write\_rds}\NormalTok{(rf\_res, }\AttributeTok{file =} \StringTok{"/Users/masondelan/Downloads/rf.rds"}\NormalTok{)}
+\FunctionTok{write\_rds}\NormalTok{(boosted\_res, }\AttributeTok{file =} \StringTok{"/Users/masondelan/Downloads/boosted.rds"}\NormalTok{)}
+\FunctionTok{write\_rds}\NormalTok{(knn\_res, }\AttributeTok{file =} \StringTok{"/Users/masondelan/Downloads/knn.rds"}\NormalTok{)}
+\FunctionTok{write\_rds}\NormalTok{(logistic\_res, }\AttributeTok{file =} \StringTok{"/Users/masondelan/Downloads/logistic.rds"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rf\_final }\OtherTok{\textless{}{-}} \FunctionTok{read\_rds}\NormalTok{(}\AttributeTok{file =} \StringTok{"/Users/masondelan/Downloads/rf.rds"}\NormalTok{)}
+\NormalTok{boosted\_final }\OtherTok{\textless{}{-}} \FunctionTok{read\_rds}\NormalTok{(}\AttributeTok{file =} \StringTok{"/Users/masondelan/Downloads/boosted.rds"}\NormalTok{)}
+\NormalTok{knn\_final }\OtherTok{\textless{}{-}} \FunctionTok{read\_rds}\NormalTok{(}\AttributeTok{file =} \StringTok{"/Users/masondelan/Downloads/knn.rds"}\NormalTok{)}
+\NormalTok{linear\_final }\OtherTok{\textless{}{-}} \FunctionTok{read\_rds}\NormalTok{(}\AttributeTok{file =} \StringTok{"/Users/masondelan/Downloads/logistic.rds"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{autoplot}\NormalTok{(knn\_final)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{131finalproject_files/figure-latex/unnamed-chunk-21-1.pdf}
+
+Based on our KNN model we can see that our best perfomer was when there
+were 2 neighbors with an r-squared of \textasciitilde0.6.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{autoplot}\NormalTok{(rf\_final)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{131finalproject_files/figure-latex/unnamed-chunk-22-1.pdf}
+
+Based on our Random Forest Model we can see that the best performer was
+when we had at most 5 observations. For one randomly selected predictor
+our r-squared was at its highest value.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{autoplot}\NormalTok{(boosted\_final)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{131finalproject_files/figure-latex/unnamed-chunk-23-1.pdf}
+
+Based on our Boosted Trees Model the smallest learning rate (1.023) did
+the best, the lowest RMSE was at \textasciitilde500 trees.
+
+\hypertarget{best-models}{%
+\subsection{\texorpdfstring{\textbf{Best
+Models}}{Best Models}}\label{best-models}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{linear\_best }\OtherTok{\textless{}{-}} \FunctionTok{collect\_metrics}\NormalTok{(linear\_final)}
+\NormalTok{linear\_best}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2 x 6
+##   .metric .estimator    mean     n std_err .config             
+##   <chr>   <chr>        <dbl> <int>   <dbl> <chr>               
+## 1 rmse    standard   10.0        5 0.0573  Preprocessor1_Model1
+## 2 rsq     standard    0.0141     5 0.00174 Preprocessor1_Model1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{knn\_best }\OtherTok{\textless{}{-}} \FunctionTok{collect\_metrics}\NormalTok{(knn\_final)}
+\NormalTok{knn\_best}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 10 x 7
+##    neighbors .metric .estimator  mean     n std_err .config             
+##        <int> <chr>   <chr>      <dbl> <int>   <dbl> <chr>               
+##  1         1 rmse    standard   6.97      5 0.0925  Preprocessor1_Model1
+##  2         1 rsq     standard   0.575     5 0.00866 Preprocessor1_Model1
+##  3         2 rmse    standard   6.72      5 0.0533  Preprocessor1_Model2
+##  4         2 rsq     standard   0.590     5 0.00391 Preprocessor1_Model2
+##  5         3 rmse    standard   6.72      5 0.0501  Preprocessor1_Model3
+##  6         3 rsq     standard   0.581     5 0.00375 Preprocessor1_Model3
+##  7         4 rmse    standard   6.78      5 0.0499  Preprocessor1_Model4
+##  8         4 rsq     standard   0.568     5 0.00422 Preprocessor1_Model4
+##  9         5 rmse    standard   6.88      5 0.0462  Preprocessor1_Model5
+## 10         5 rsq     standard   0.553     5 0.00412 Preprocessor1_Model5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rf\_best }\OtherTok{\textless{}{-}} \FunctionTok{collect\_metrics}\NormalTok{(rf\_final)}
+\NormalTok{rf\_best}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 250 x 9
+##     mtry trees min_n .metric .estimator  mean     n std_err .config             
+##    <int> <int> <int> <chr>   <chr>      <dbl> <int>   <dbl> <chr>               
+##  1     1   200     5 rmse    standard   5.43      5 0.0440  Preprocessor1_Model~
+##  2     1   200     5 rsq     standard   0.725     5 0.00794 Preprocessor1_Model~
+##  3     2   200     5 rmse    standard   5.43      5 0.0416  Preprocessor1_Model~
+##  4     2   200     5 rsq     standard   0.724     5 0.00715 Preprocessor1_Model~
+##  5     3   200     5 rmse    standard   5.44      5 0.0435  Preprocessor1_Model~
+##  6     3   200     5 rsq     standard   0.723     5 0.00747 Preprocessor1_Model~
+##  7     4   200     5 rmse    standard   5.47      5 0.0489  Preprocessor1_Model~
+##  8     4   200     5 rsq     standard   0.719     5 0.00840 Preprocessor1_Model~
+##  9     5   200     5 rmse    standard   5.47      5 0.0432  Preprocessor1_Model~
+## 10     5   200     5 rsq     standard   0.719     5 0.00790 Preprocessor1_Model~
+## # i 240 more rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{boosted\_best }\OtherTok{\textless{}{-}} \FunctionTok{collect\_metrics}\NormalTok{(boosted\_final)}
+\NormalTok{boosted\_best}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 250 x 9
+##    trees min_n learn_rate .metric .estimator  mean     n std_err .config        
+##    <int> <int>      <dbl> <chr>   <chr>      <dbl> <int>   <dbl> <chr>          
+##  1    50     5       1.02 rmse    standard   6.97      5  0.113  Preprocessor1_~
+##  2    50     5       1.02 rsq     standard   0.557     5  0.0133 Preprocessor1_~
+##  3   162     5       1.02 rmse    standard   6.75      5  0.137  Preprocessor1_~
+##  4   162     5       1.02 rsq     standard   0.595     5  0.0155 Preprocessor1_~
+##  5   275     5       1.02 rmse    standard   6.75      5  0.138  Preprocessor1_~
+##  6   275     5       1.02 rsq     standard   0.596     5  0.0156 Preprocessor1_~
+##  7   387     5       1.02 rmse    standard   6.75      5  0.138  Preprocessor1_~
+##  8   387     5       1.02 rsq     standard   0.596     5  0.0156 Preprocessor1_~
+##  9   500     5       1.02 rmse    standard   6.75      5  0.139  Preprocessor1_~
+## 10   500     5       1.02 rsq     standard   0.596     5  0.0157 Preprocessor1_~
+## # i 240 more rows
+\end{verbatim}
+
+Our best knn model had an r-squared of 0.57 and an rmse of 6.79 with 1
+neighbor. Our best linear model had an r-squared value of 0.015 and an
+RMSE of 9.83. Objectively, this model performed poorly as our r-squared
+is very low. Lets try and extract accuracy and AUC ROC metrics to get a
+better understanding of what models performed the best.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# mean accuracy from metrics}
+\NormalTok{extract\_mean\_accuracy }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(metrics) \{}
+\NormalTok{  metrics }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{filter}\NormalTok{(.metric }\SpecialCharTok{==} \StringTok{"accuracy"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{summarise}\NormalTok{(}\AttributeTok{mean\_accuracy =} \FunctionTok{mean}\NormalTok{(mean, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{), }\AttributeTok{.groups =} \StringTok{\textquotesingle{}drop\textquotesingle{}}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{pull}\NormalTok{(mean\_accuracy)\}}
+
+\NormalTok{extract\_mean\_roc\_auc }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(metrics) \{}
+\NormalTok{  metrics }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{filter}\NormalTok{(.metric }\SpecialCharTok{==} \StringTok{"roc\_auc"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{summarise}\NormalTok{(}\AttributeTok{mean\_roc\_auc =} \FunctionTok{mean}\NormalTok{(mean, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{), }\AttributeTok{.groups =} \StringTok{\textquotesingle{}drop\textquotesingle{}}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{pull}\NormalTok{(mean\_roc\_auc)\}}
+
+
+\NormalTok{linear\_accuracy }\OtherTok{\textless{}{-}} \FunctionTok{extract\_mean\_accuracy}\NormalTok{(linear\_best)}
+\NormalTok{linear\_roc\_auc }\OtherTok{\textless{}{-}} \FunctionTok{extract\_mean\_roc\_auc}\NormalTok{(linear\_best)}
+
+\NormalTok{knn\_accuracy }\OtherTok{\textless{}{-}} \FunctionTok{extract\_mean\_accuracy}\NormalTok{(knn\_best)}
+\NormalTok{knn\_roc\_auc }\OtherTok{\textless{}{-}} \FunctionTok{extract\_mean\_roc\_auc}\NormalTok{(knn\_best)}
+
+\NormalTok{rf\_accuracy }\OtherTok{\textless{}{-}} \FunctionTok{extract\_mean\_accuracy}\NormalTok{(rf\_best)}
+\NormalTok{rf\_roc\_auc }\OtherTok{\textless{}{-}} \FunctionTok{extract\_mean\_roc\_auc}\NormalTok{(rf\_best)}
+
+\NormalTok{boosted\_accuracy }\OtherTok{\textless{}{-}} \FunctionTok{extract\_mean\_accuracy}\NormalTok{(boosted\_best)}
+\NormalTok{boosted\_roc\_auc }\OtherTok{\textless{}{-}} \FunctionTok{extract\_mean\_roc\_auc}\NormalTok{(boosted\_best)}
+
+\CommentTok{\# Combining all models into one table}
+\NormalTok{all\_models }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}
+  \AttributeTok{Model =} \FunctionTok{c}\NormalTok{(}\StringTok{"Logistic Regression"}\NormalTok{, }\StringTok{"KNN"}\NormalTok{, }\StringTok{"Random Forest"}\NormalTok{, }\StringTok{"Boosted Trees"}\NormalTok{),}
+  \AttributeTok{Accuracy =} \FunctionTok{c}\NormalTok{(linear\_accuracy, knn\_accuracy, rf\_accuracy, boosted\_accuracy),}
+  \AttributeTok{ROC\_AUC =} \FunctionTok{c}\NormalTok{(linear\_roc\_auc, knn\_roc\_auc, rf\_roc\_auc, boosted\_roc\_auc))}
+
+\NormalTok{all\_models}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 4 x 3
+##   Model               Accuracy ROC_AUC
+##   <chr>                  <dbl>   <dbl>
+## 1 Logistic Regression      NaN     NaN
+## 2 KNN                      NaN     NaN
+## 3 Random Forest            NaN     NaN
+## 4 Boosted Trees            NaN     NaN
+\end{verbatim}
+
+At this juncture in the project I ran into an issue were all of my
+accuracy and ROC\_AUC values were NaN, and my analysis on which models
+performed the best haulted. Based on the results from the graphs I have
+interpreted that my boosted trees model performed the best, following up
+with the knn model.
+
+\hypertarget{conclusion}{%
+\section{\texorpdfstring{\textbf{Conclusion}}{Conclusion}}\label{conclusion}}
+
+I was able to see important results from each of the four models I used
+by looking at their individual plots, even if I was unable to complete
+the extrapolation of the best models. These findings led me to the
+conclusion that the KNN and Boosted Trees models had the best
+performances. This result was expected as boosted tree or KNN models are
+more robust than linear regression. My grasp of the real data was
+improved by my exploratory data analysis (EDA), which turned out to be
+quite enlightening. I came to see that a large number of the variables I
+chose not to include were categorical, and it could have been better to
+include them.
+
+My original idea for this project was to determine how a song's
+popularity rating was affected by its audio qualities. Even though we
+were unable to determine which model performed the best in the end, I
+think this project is the start of an interesting side project that I
+plan to carry out after the course is over. My love of data science and
+music has made it easier to whittle down my options for a job in the
+music business. With this study, I hope to learn more about what really
+makes a song popular. My curiosity about the intersection between data
+science and music has been piqued by this experience, and I am looking
+forward to the opportunities that this will create.
+
+\end{document}

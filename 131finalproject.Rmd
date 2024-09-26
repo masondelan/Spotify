@@ -1,0 +1,416 @@
+---
+title: "131 Final Project"
+author: "mason delan"
+date: "2024-06-04"
+output:
+  html_document:
+    df_print: paged
+---
+
+# [Spotify Charts - Exploring Sound Characteristics]{.underline}
+
+![](images/spotify logo.jpeg)
+
+# **Introduction**
+
+This data set encompasses all "Top 200" and "Viral 50" charts released worldwide by Spotify. Updated every 2-3 days, it includes all charts from January 1, 2019, onward. This collection builds on the Kaggle Data set: Spotify Charts, featuring 29 entries for each record obtained via the Spotify API. I chose this data set because of my passion for music, I have been mixing and producing electronic dance music for 3 years now. Something I decided to pursue was my DJ career here in Santa Barbara, playing at local clubs and bars. It has also allowed me to integrate myself in the community in such a profound and exciting way. The main motivation for this project is gain a deeper understanding into the music industry. I am seeking information about how popular tracks impact certain markets/regions. There is a lot of data in this data set (\~25.2 GB), so running models may be timely. There are a few variables of interest that spotify has created in order to gain certain metrics from their platform, including danceability, acousticness, and loudness. We will attempt to explore the relationship between said variables and the popularity of each song (rank, streaming numbers, popularity metric) in order to draw interesting conclusions.
+
+The data set comes from Kaggle, but the original source is from Spotify charts.
+
+## **Sources**
+
+Citation: <https://www.spotify.com/> <https://spotifycharts.com/>
+
+Kaggle Page: <https://www.kaggle.com/datasets/sunnykakar/spotify-charts-all-audio-data/data>
+
+# **Missing Values**
+
+I'm going to start by reducing my data set by discarding missing values and narrowing down the variables I am most interested in. This initial step will help ensure the quality and reliability of the data I use for modeling. By removing rows with missing values, I can prevent potential biases and inaccuracies that could arise from incomplete data. Focusing on the most relevant variables will streamline the data set, making it easier to interpret. This targeted approach will improve the efficiency and performance of machine learning models.
+
+```{r}
+library(tidyverse)  
+library(ggplot2)    
+library(dplyr)      
+library(DataExplorer) # For automated EDA
+library(tidymodels)
+library(kknn)
+library(yardstick)
+library(parsnip)
+library(tune)
+library(themis)
+library(ranger)
+library(recipes)
+
+set.seed(123)
+
+setwd("/Users/masondelan/Desktop/131finalproject/")
+
+data <- read.csv("/Users/masondelan/Desktop/131finalproject/merged_data.csv")
+
+str(data)
+
+
+
+```
+
+It seems like we have too much data for my laptop to handle, I am checking for missing values and removing rows with missing values. I believe that this could affect the data and skew my results, however, I am willing to make this compromise for compilation purposes. Below I am cleaning up the data and printing my data to ensure what I want removed from the data set is gone.
+
+```{r}
+# check for missing values
+sum(is.na(data))
+missing_values <- colSums(is.na(data))
+print(missing_values)
+
+# removing rows with any missing values
+cleaned_spotify_data <- data %>% drop_na()
+
+# ensuring that missing values have been removed
+cleaned_missing_values <-colSums(is.na(cleaned_spotify_data))
+print(cleaned_missing_values)
+```
+
+Here we are reducing the data set size, as we have over 20 million observations. A popularity threshold of greater than 50 has been used as the baseline, excluding observations with a score under 50. I am also limiting my data to about 10,000 observations. This targeted reduction simplifies the data set and focuses analysis on the most relevant and impactful subset of data, ensuring meaningful results aligned with the project's objectives.
+
+```{r}
+reduced_data <- cleaned_spotify_data %>% sample_frac(0.2) %>% select(title, artist, popularity, af_danceability, af_loudness, af_acousticness, af_energy) %>% filter(popularity > 50) %>%  sample_n(10000)
+
+# checking structure of our reduced data set
+str(reduced_data)
+
+
+```
+
+I decided to keep a few variables that I am most interested in, which include: artist, title, popularity, danceability, loudness, acousticness, and energy. All of which I believe will give me the most meaningful information about how/why a song is charting high on spotify.
+
+# **EDA**
+
+During this section of exploratory data analysis, I am seeking to gain an understanding of how the variables I selected relate to one another. What interests me the most is how the popularity rating differs between danceability, acousticness, loudness, and energy. I have demonstrated a few plots to visualize these relationships. From the graph below we see the range in acousticness of a particular song in relation to its popularity, we cannot definitively say much other than its observable even spread. The mean seems to hang around the middle of our plot.
+
+```{r}
+head(reduced_data)
+
+summary(reduced_data)
+
+# getting a general idea of variables and their frequencies
+plot_histogram(reduced_data)
+
+# popularity & acousticness
+ggplot(reduced_data, aes(x = popularity, y = af_acousticness, fill = popularity)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Popularity in Relation to Acousticness", x = "popularity", y = "acousticness") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+
+
+```
+
+## **Histograms of relevant variables**
+
+I will now visualize the distributions of my variables of interest (danceability, loudness, acousticness, energy) with histograms. This will help me determine what models would work best for our variables of interest.
+
+```{r}
+hist(reduced_data$af_danceability, main="Danceability Distribution", xlab="Danceability", col="blue", breaks=30)
+```
+
+```{r}
+hist(reduced_data$af_loudness, main = 'Loudness Distribution', xlab = 'Loudness', col = 'blue', breaks = 30)
+```
+
+```{r}
+hist(reduced_data$af_acousticness, main = 'Acousticness Distribution', xlab = "Acousticness", col = 'blue', breaks = 30)
+```
+
+```{r}
+hist(reduced_data$af_energy, main = 'Energy Distribution', xlab = 'Energy', col = 'blue', breaks = 30)
+```
+
+The histograms reveal that danceability, loudness, and energy have normal distributions, centered around a mean with symmetrical tails, which is beneficial for statistical models assuming normally distributed input data. Acousticness, however, does not display a normal distribution and shows a decreasing exponential curve, with most values clustered towards the lower end. This skewness could impact our models differently, and we must account for it during analysis. Understanding these distributions is crucial for selecting models and ensuring data meets modeling techniques' assumptions. These patterns will influence model performance and accuracy in subsequent steps.
+
+```{r}
+ggplot(reduced_data, aes(x = popularity, y = af_loudness, fill = popularity)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Popularity in Relation to Loudness", x = "popularity", y = "loudness") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+```
+
+The numerical values for loudness range from 0 to \~-11, hence the graph is upside down. We do not have to worry about this since the nature of our values are different. We can see that loudness does play a role in the popularity of a song, as loudness increases so does the frequencies in popularity, very interesting!
+
+```{r}
+ggplot(reduced_data, aes(x = popularity, y = af_energy, fill = popularity)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Popularity in Relation to Energy", x = "popularity", y = "energy") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+The bar plot shows that energy significantly influences Spotify song popularity. However, the study also aims to explore other variables and their relationships, examining correlations between them. This will help identify the most related features and their interactions, potentially uncovering hidden patterns and dependencies. This understanding will inform the modeling strategy and help select the most relevant features for predictive models. The next step is to create a correlation matrix and visualize these relationships, providing a comprehensive overview of how each variable influences and relates to others.
+
+## **Correlation Matrix & Heat Map**
+
+Lets now create a correlation matrix & heat map to better understand all the relationships at play.
+
+```{r}
+numeric_df <- reduced_data[, sapply(reduced_data, is.numeric)]
+correlation_matrix <- cor(numeric_df)
+# Load necessary packages
+library(corrplot)
+library(Hmisc)
+corrplot(correlation_matrix, method = "color", 
+         col = colorRampPalette(c("red", "white", "blue"))(200), 
+         type = "upper", order = "hclust", 
+         addCoef.col = "black", tl.cex = 0.8, tl.col = "black")
+
+
+
+```
+
+The heatmap reveals a strong positive correlation between loudness and energy, suggesting that as a song's loudness increases, its energy level also increases. This relationship is intuitive, as higher volume typically conveys more energy and intensity. Conversely, the lowest correlation is between energy and acousticness, suggesting that as energy increases, its acoustic qualities decrease. Understanding these correlations is crucial as they provide insights into the relationships between song attributes, impacting model performance and interpretation. These findings will guide feature selection and model development, ensuring accurate predictive analysis.
+
+# **Splitting the data**
+
+The data is divided into training and testing datasets to ensure the model's generalizability to unseen data. A 70/30 split is chosen, with 70% used for training and 30% for testing. Given that we have a substantial dataset with over 2.4 million observations after reduction, this split provides a robust sample size for both training (\~1.7 million observations) and testing (\~740,000 observations). To maintain the distribution of the target variable, I opted to stratify the split based on popularity.
+
+```{r}
+split <- initial_split(reduced_data, prop = .7, strata = popularity)
+
+training_set <- training(split)
+testing_set <- testing(split)
+```
+
+# **Recipe**
+
+Here I am setting up my recipe. Both title and artist are character variables so we will remove them from our training model.
+
+```{r}
+recipe <- recipe(popularity ~ ., data = training_set) %>%
+  step_rm(title, artist) %>% 
+  step_zv(all_predictors()) %>%  
+  step_dummy(all_nominal(), -all_outcomes()) %>%
+  step_normalize(all_numeric(), -all_outcomes())
+
+# prep recipe with training data
+prepared_recipe <- prep(recipe, training = training_set)
+
+# baking the recipe
+baked_data <- bake(prepared_recipe, new_data = NULL) 
+
+colnames(baked_data)
+```
+
+Stratifying cross validation on my response variable (popularity).
+
+```{r}
+spotify_fold <- vfold_cv(training_set, v = 5, strata = popularity)
+```
+
+# **Models**
+
+Since I am dealing with all numerical variables, it makes the most sense to include the following types of models:
+
+-   Linear Regression
+
+-   K Nearest Neighbors
+
+-   Elastic Net
+
+-   Boosted Trees
+
+Let's define all our model specifications.
+
+```{r}
+library(xgboost)
+# regression
+linear_spec <- linear_reg() %>%
+               set_engine("lm") %>%
+               set_mode("regression")
+
+# k nearest neighbors
+knn_spec <- nearest_neighbor(neighbors = tune()) %>% 
+  set_engine("kknn") %>% 
+  set_mode("regression")
+
+# random forest
+rf_spec <- rand_forest(
+  trees = tune(),       
+  mtry = tune(),        
+  min_n = tune()) %>%
+  set_engine("ranger") %>%
+  set_mode("regression")
+
+# boosted tree
+boosted_spec <- boost_tree(
+    trees = tune(),
+    min_n = tune(),
+    learn_rate = tune()) %>%
+  set_engine("xgboost") %>%
+  set_mode("regression")
+```
+
+## Creating workflows
+
+```{r}
+logistic_wf <- workflow() %>%
+  add_model(linear_spec) %>%
+  add_recipe(recipe)
+
+knn_wf <- workflow() %>%
+  add_model(knn_spec) %>%
+  add_recipe(recipe)
+
+rf_wf <- workflow() %>%
+  add_model(rf_spec) %>%
+  add_recipe(recipe)
+
+boosted_wf <- workflow() %>%
+  add_model(boosted_spec) %>%
+  add_recipe(recipe)
+```
+
+## Tuning Grid
+
+```{r}
+knn_grid <- grid_regular(neighbors(range = c(1, 5)), levels = 5)
+
+rf_grid <- grid_regular(
+  mtry(range = c(1, 5)), 
+  trees(range = c(200,1000)), 
+  min_n(range = c(5,20)), 
+  levels = 5)
+
+
+boosted_grid <- grid_regular(
+    trees(range = c(50, 500)),
+    min_n(range = c(5, 20)),
+    learn_rate(range = c(0.01, 0.3)),
+    levels = 5)
+```
+
+## Model Results
+
+```{r}
+logistic_res <- tune_grid(
+  logistic_wf,
+  resamples = spotify_fold)
+
+knn_res <- tune_grid(
+  knn_wf,
+  resamples = spotify_fold,  
+  grid = knn_grid)
+
+ rf_res <- tune_grid(
+  rf_wf,
+  resamples = spotify_fold,
+  grid = rf_grid)
+
+boosted_res <- tune_grid(
+ boosted_wf,
+  resamples = spotify_fold,
+  grid = boosted_grid)
+
+```
+
+```{r}
+write_rds(rf_res, file = "/Users/masondelan/Downloads/rf.rds")
+write_rds(boosted_res, file = "/Users/masondelan/Downloads/boosted.rds")
+write_rds(knn_res, file = "/Users/masondelan/Downloads/knn.rds")
+write_rds(logistic_res, file = "/Users/masondelan/Downloads/logistic.rds")
+
+
+
+```
+
+```{r}
+rf_final <- read_rds(file = "/Users/masondelan/Downloads/rf.rds")
+boosted_final <- read_rds(file = "/Users/masondelan/Downloads/boosted.rds")
+knn_final <- read_rds(file = "/Users/masondelan/Downloads/knn.rds")
+linear_final <- read_rds(file = "/Users/masondelan/Downloads/logistic.rds")
+```
+
+```{r}
+autoplot(knn_final)
+```
+
+Based on our KNN model we can see that our best perfomer was when there were 2 neighbors with an r-squared of \~0.6.
+
+```{r}
+autoplot(rf_final)
+```
+
+Based on our Random Forest Model we can see that the best performer was when we had at most 5 observations. For one randomly selected predictor our r-squared was at its highest value.
+
+```{r}
+autoplot(boosted_final)
+```
+
+Based on our Boosted Trees Model the smallest learning rate (1.023) did the best, the lowest RMSE was at \~500 trees.
+
+## **Best Models**
+
+```{r}
+linear_best <- collect_metrics(linear_final)
+linear_best
+```
+
+```{r}
+knn_best <- collect_metrics(knn_final)
+knn_best
+```
+
+```{r}
+rf_best <- collect_metrics(rf_final)
+rf_best
+```
+
+```{r}
+boosted_best <- collect_metrics(boosted_final)
+boosted_best
+```
+
+Our best knn model had an r-squared of 0.57 and an rmse of 6.79 with 1 neighbor. Our best linear model had an r-squared value of 0.015 and an RMSE of 9.83. Objectively, this model performed poorly as our r-squared is very low. Lets try and extract accuracy and AUC ROC metrics to get a better understanding of what models performed the best.
+
+```{r}
+# mean accuracy from metrics
+extract_mean_accuracy <- function(metrics) {
+  metrics %>%
+    filter(.metric == "accuracy") %>%
+    summarise(mean_accuracy = mean(mean, na.rm = TRUE), .groups = 'drop') %>%
+    pull(mean_accuracy)}
+
+extract_mean_roc_auc <- function(metrics) {
+  metrics %>%
+    filter(.metric == "roc_auc") %>%
+    summarise(mean_roc_auc = mean(mean, na.rm = TRUE), .groups = 'drop') %>%
+    pull(mean_roc_auc)}
+
+
+linear_accuracy <- extract_mean_accuracy(linear_best)
+linear_roc_auc <- extract_mean_roc_auc(linear_best)
+
+knn_accuracy <- extract_mean_accuracy(knn_best)
+knn_roc_auc <- extract_mean_roc_auc(knn_best)
+
+rf_accuracy <- extract_mean_accuracy(rf_best)
+rf_roc_auc <- extract_mean_roc_auc(rf_best)
+
+boosted_accuracy <- extract_mean_accuracy(boosted_best)
+boosted_roc_auc <- extract_mean_roc_auc(boosted_best)
+
+# Combining all models into one table
+all_models <- tibble(
+  Model = c("Logistic Regression", "KNN", "Random Forest", "Boosted Trees"),
+  Accuracy = c(linear_accuracy, knn_accuracy, rf_accuracy, boosted_accuracy),
+  ROC_AUC = c(linear_roc_auc, knn_roc_auc, rf_roc_auc, boosted_roc_auc))
+
+all_models
+```
+
+At this juncture in the project I ran into an issue were all of my accuracy and ROC_AUC values were NaN, and my analysis on which models performed the best haulted. Based on the results from the graphs I have interpreted that my boosted trees model performed the best, following up with the knn model.
+
+# **Conclusion**
+
+I was able to see important results from each of the four models I used by looking at their individual plots, even if I was unable to complete the extrapolation of the best models. These findings led me to the conclusion that the KNN and Boosted Trees models had the best performances. This result was expected as boosted tree or KNN models are more robust than linear regression. My grasp of the real data was improved by my exploratory data analysis (EDA), which turned out to be quite enlightening. I came to see that a large number of the variables I chose not to include were categorical, and it could have been better to include them.
+
+My original idea for this project was to determine how a song's popularity rating was affected by its audio qualities. Even though we were unable to determine which model performed the best in the end, I think this project is the start of an interesting side project that I plan to carry out after the course is over. My love of data science and music has made it easier to whittle down my options for a job in the music business. With this study, I hope to learn more about what really makes a song popular. My curiosity about the intersection between data science and music has been piqued by this experience, and I am looking forward to the opportunities that this will create.
